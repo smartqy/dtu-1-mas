@@ -1,5 +1,7 @@
 package searchclient;
 
+import searchclient.cbs.model.Location;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -98,7 +100,7 @@ public class SearchClient {
         return new State(agentRows, agentCols, agentColors, walls, boxes, boxColors, goals, boxesLoc);
     }
 
-    public static Action[][] search(State initialState, Frontier frontier) {
+    public static Action[][] search(State initialState, Frontier<State> frontier) {
         System.err.format("Starting %s.\n", frontier.getName());
 
         return GraphSearch.search(initialState, frontier);
@@ -109,17 +111,22 @@ public class SearchClient {
         System.err.println("SearchClient initializing. I am sending this using the error output stream.");
 
         // Send client name to server.
-        System.out.println("SearchClient");
+        System.out.println("GHandDirt");
 
         // We can also print comments to stdout by prefixing with a #.
         System.out.println("#This is a comment.");
+
+        // Provide information about who we are when asked
+        System.out.println("#I am a traditional search client for solving multi-agent pathfinding problems.");
+        System.out.println("#I support multiple search strategies: BFS, DFS, A*, Weighted A*, and Greedy search.");
+        System.out.println("#I find paths for multiple agents in shared environments using graph search algorithms.");
 
         // Parse the level.
         BufferedReader serverMessages = new BufferedReader(new InputStreamReader(System.in, StandardCharsets.US_ASCII));
         State initialState = SearchClient.parseLevel(serverMessages);
 
         // Select search strategy.
-        Frontier frontier;
+        Frontier<State> frontier;
         if (args.length > 0) {
             switch (args[0].toLowerCase(Locale.ROOT)) {
                 case "-bfs":
@@ -181,6 +188,13 @@ public class SearchClient {
             System.exit(0);
         } else {
             System.err.format("Found solution of length %,d.\n", plan.length);
+            for (int i = 0; i < plan.length; i++) {
+                System.err.format("Step Num %d: ", i);
+                for (int j = 0; j < plan[i].length; j++) {
+                    System.err.format("%s|", plan[i][j].name);
+                }
+                System.err.println();
+            }
 
             for (Action[] jointAction : plan) {
                 System.out.print(jointAction[0].name + "@" + jointAction[0].name);

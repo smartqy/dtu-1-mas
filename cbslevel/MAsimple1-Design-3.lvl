@@ -1,0 +1,26 @@
+#domain
+hospital
+#levelname
+MAsimple1-Design-3
+#colors
+red: 0, A,B
+green: 1, C
+Purple: 2, D
+blue: 3, E
+#initial
+++++++++++++++++++++++++
++     E   0   3    A   +
++   1                  +
++                      +
++                  C   +
++   2         D    B   +
+++++++++++++++++++++++++
+#goal
+++++++++++++++++++++++++
++    E              A  +
++                      +
++                      +
++                   C  +
++         D         B  +
+++++++++++++++++++++++++
+#end

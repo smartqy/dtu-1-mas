@@ -5,22 +5,24 @@ import java.util.Comparator;
 import java.util.HashSet;
 import java.util.PriorityQueue;
 
-public interface Frontier {
-    void add(State state);
+public interface Frontier<E> {
+    void add(E item);
 
-    State pop();
+    E pop();
 
     boolean isEmpty();
 
     int size();
 
-    boolean contains(State state);
+    boolean contains(E item);
+
+    boolean hasNotVisited(E item);
 
     String getName();
 }
 
 class FrontierBFS
-        implements Frontier {
+        implements Frontier<State> {
     private final ArrayDeque<State> queue = new ArrayDeque<>(65536);
     private final HashSet<State> set = new HashSet<>(65536);
 
@@ -53,13 +55,18 @@ class FrontierBFS
     }
 
     @Override
+    public boolean hasNotVisited(State item) {
+        return !this.set.contains(item);
+    }
+
+    @Override
     public String getName() {
         return "breadth-first search";
     }
 }
 
 class FrontierDFS
-        implements Frontier {
+        implements Frontier<State> {
     private final ArrayDeque<State> queue = new ArrayDeque<>(65536);
     private final HashSet<State> set = new HashSet<>(65536);
 
@@ -92,13 +99,18 @@ class FrontierDFS
     }
 
     @Override
+    public boolean hasNotVisited(State item) {
+        return !this.set.contains(item);
+    }
+
+    @Override
     public String getName() {
         return "depth-first search";
     }
 }
 
 class FrontierBestFirst
-        implements Frontier {
+        implements Frontier<State> {
 
     private Heuristic heuristic;
     private PriorityQueue<State> queue;
@@ -112,17 +124,13 @@ class FrontierBestFirst
 
     @Override
     public void add(State state) {
-        if (!visited.contains(state)) { // 仅添加未访问状态
-            queue.add(state);
-            visited.add(state);
-        }
+        queue.add(state);
+        visited.add(state);
     }
 
     @Override
     public State pop() {
-        State s = queue.poll();
-        this.visited.remove(s);
-        return s;
+        return queue.poll();
     }
 
     @Override
@@ -137,7 +145,12 @@ class FrontierBestFirst
 
     @Override
     public boolean contains(State state) {
-        return visited.contains(state);
+        return this.visited.contains(state);
+    }
+
+    @Override
+    public boolean hasNotVisited(State item) {
+        return !this.visited.contains(item);
     }
 
     @Override

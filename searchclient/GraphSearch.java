@@ -6,7 +6,7 @@ import java.util.HashSet;
 
 public class GraphSearch {
 
-    public static Action[][] search(State initialState, Frontier frontier) {
+    public static Action[][] search(State initialState, Frontier<State> frontier) {
         boolean outputFixedSolution = false;
 
         if (outputFixedSolution) {

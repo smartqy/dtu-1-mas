@@ -1,5 +1,7 @@
 package searchclient;
 
+import searchclient.cbs.model.Location;
+
 import java.util.*;
 
 public class State {
@@ -372,7 +374,10 @@ public class State {
                 }
 
                 // Moving into same cell?
-                if ((destinationRows[a1] == destinationRows[a2] && destinationCols[a1] == destinationCols[a2]) || (boxRows[a1] == boxRows[a2] && boxRows[a1] == boxCols[a2]) || (destinationRows[a1] == boxRows[a2] && destinationCols[a1] == boxCols[a2]) || (destinationRows[a2] == boxRows[a1] && destinationCols[a2] == boxCols[a1])) {
+                if ((destinationRows[a1] == destinationRows[a2] && destinationCols[a1] == destinationCols[a2])
+                        || (boxRows[a1] == boxRows[a2] && boxCols[a1] == boxCols[a2])
+                        || (destinationRows[a1] == boxRows[a2] && destinationCols[a1] == boxCols[a2])
+                        || (destinationRows[a2] == boxRows[a1] && destinationCols[a2] == boxCols[a1])) {
                     return true;
                 }
             }
@@ -476,28 +481,5 @@ public class State {
             s.append("\n");
         }
         return s.toString();
-    }
-}
-
-class Location {
-    private int row;
-    private int col;
-
-    public Location(int row, int col) {
-        this.row = row;
-        this.col = col;
-    }
-
-    public int getCol() {
-        return col;
-    }
-
-    public int getRow() {
-        return row;
-    }
-
-    public void update(int row, int col) {
-        this.row = row;
-        this.col = col;
     }
 }
