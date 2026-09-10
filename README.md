@@ -9,7 +9,9 @@ The repo contains two clients:
 
 ## Demo
 
-[▶️ Watch the demo video](assets/demo.mov) — the CBS/MA-CBS client solving a multi-agent level with the server's `-g` graphical viewer. Click through to GitHub's built-in player.
+The CBS/MA-CBS client solving a multi-agent level with the server's `-g` graphical viewer:
+
+![Demo](assets/demo.mov)
 
 ## Problem
 
