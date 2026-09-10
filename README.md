@@ -11,7 +11,9 @@ The repo contains two clients:
 
 The CBS/MA-CBS client solving a multi-agent level with the server's `-g` graphical viewer:
 
-![Demo](assets/demo.mp4)
+![Demo](assets/demo.gif)
+
+([mp4 version](assets/demo.mp4) with slightly sharper quality, if you'd rather download it.)
 
 ## Problem
 
