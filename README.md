@@ -7,6 +7,10 @@ The repo contains two clients:
 - **`SearchClient`** — classic single-agent search (BFS, DFS, A*, Weighted A*, Greedy) for single-agent levels.
 - **`NewSearchClient`** — a **Conflict-Based Search (CBS) / Meta-Agent CBS (MA-CBS)** client that plans collision-free paths for many agents at once.
 
+## Demo
+
+[▶️ Watch the demo video](assets/demo.mov) — the CBS/MA-CBS client solving a multi-agent level with the server's `-g` graphical viewer. Click through to GitHub's built-in player.
+
 ## Problem
 
 The server defines a level as a grid of walls, agents, boxes and goal cells:
