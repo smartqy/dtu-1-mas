@@ -9,11 +9,17 @@ The repo contains two clients:
 
 ## Demo
 
-The CBS/MA-CBS client solving a multi-agent level with the server's `-g` graphical viewer:
+The CBS/MA-CBS client solving multi-agent levels with the server's `-g` graphical viewer:
 
 ![Demo](assets/demo.gif)
 
 ([mp4 version](assets/demo.mp4) with slightly sharper quality, if you'd rather download it.)
+
+**`cbslevel/GHandDirt.lvl`** — 3 colored agents navigating a diagonal-wall maze, solved with MA-CBS(25) in 0.57s / 57 actions:
+
+![GHandDirt demo](assets/demo-ghanddirt.gif)
+
+([mp4 version](assets/demo-ghanddirt.mp4))
 
 ## Problem
 
