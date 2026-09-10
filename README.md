@@ -112,38 +112,49 @@ readme-searchclient.txt   # original course instructions for SearchClient
 readme-cbs-client.txt     # instructions for the CBS client
 ```
 
-## Building
+## Local setup
+
+`server.jar` is provided by the course and is **not** included in this repo — get it from the course materials (e.g. the `programming-project` handout on DTU Learn), then point `SERVER_JAR` at it:
 
 ```bash
-cd searchclient
-javac searchclient/*.java searchclient/cbs/**/*.java
+export SERVER_JAR=/path/to/server.jar
 ```
 
-Requires JDK 11+. Make sure the `CLASSPATH` environment variable is **not** set, or compilation may fail.
+## Building
+
+Run from the **repo root** (the `searchclient` package folder lives directly under it, so the repo root is the javac source root):
+
+```bash
+javac -d out $(find searchclient -name "*.java")
+```
+
+This compiles both `SearchClient` and `NewSearchClient` (and everything under `searchclient/cbs/`) into `out/`. Requires JDK 11+. Make sure the `CLASSPATH` environment variable is **not** set, or compilation may fail.
 
 ## Running
 
-All commands run from the `searchclient/` directory, against the course-provided `server.jar` and level files.
+All commands below run from the **repo root**, using the classes just built in `out/`.
 
-**Classic single-agent search:**
+**Classic single-agent search** (needs a course-provided single-agent level, e.g. from the `levels/` folder that ships alongside `server.jar`):
 
 ```bash
-java -jar ../server.jar -l ../levels/SAD1.lvl -c "java searchclient.SearchClient -astar" -g -s 150 -t 180
+java -jar "$SERVER_JAR" -l /path/to/levels/SAD1.lvl -c "java -cp out searchclient.SearchClient -astar" -g -s 150 -t 180
 ```
 
 Swap `-astar` for `-dfs`, `-wastar`, or `-greedy` (default is BFS).
 
-**CBS / MA-CBS client:**
+**CBS / MA-CBS client, on this repo's own multi-agent levels** (`cbslevel/`):
 
 ```bash
 # Basic CBS, no merging
-java -jar ../server.jar -l cbslevel/MAPF03C.lvl -c "java searchclient.NewSearchClient" -g -s 150 -t 180
+java -jar "$SERVER_JAR" -l cbslevel/MAsimple1.lvl -c "java -cp out searchclient.NewSearchClient" -g -s 150 -t 180
 
 # MA-CBS: merge two agents into a meta-agent after 25 conflicts between them
-java -jar ../server.jar -l cbslevel/MAPF03C.lvl -c "java searchclient.NewSearchClient 25" -g -s 150 -t 180
+java -jar "$SERVER_JAR" -l cbslevel/MAsimple2.lvl -c "java -cp out searchclient.NewSearchClient 25" -g -s 150 -t 180
 ```
 
-Give the JVM at least 4GB of heap on larger levels: `java -Xmx4g ...`.
+`-g` opens the graphical viewer so you can watch the agents move — that's what [the demo above](#demo) was recorded from. Drop it to run headless. Other levels worth trying for multi-agent effects: `cbslevel/MAsimple3.lvl`, `MAsimple4.lvl`, `Flower.lvl`, `JAMP.lvl`, `YummAI.lvl`.
+
+Give the JVM at least 4GB of heap on larger levels: `java -jar "$SERVER_JAR" -l ... -c "java -Xmx4g -cp out searchclient.NewSearchClient 25" ...`.
 
 ## Team
 
