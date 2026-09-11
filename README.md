@@ -34,6 +34,8 @@ This repo tackles that in two stages: a single-agent solver used to plan one (me
 
 ## Algorithms
 
+A line-by-line walkthrough of A* and MA-CBS against the actual source (with code references) lives in [ALGORITHMS.md](ALGORITHMS.md); the summary below is the short version.
+
 **Single-agent search (`SearchClient`, `GraphSearch`, `Frontier`, `Heuristic`)**
 
 - Implements the generic Graph-Search algorithm (AIMA fig. 3.7): pop a state from the frontier, expand it if not already visited, repeat until a goal state or an empty frontier.
